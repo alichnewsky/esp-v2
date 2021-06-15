@@ -141,6 +141,8 @@ upload-e2e-client-binaries: build-grpc-echo build-grpc-interop
 
 .PHONY: test test-debug test-envoy
 test: format
+	@echo "--> cleaning unit tests cache"
+	@go clean -testcache ./src/go/...
 	@echo "--> running unit tests"
 	@go test ./src/go/...
 	# The unit tests under src/go/serviceconfig reads/writes the global variable

@@ -78,6 +78,17 @@ var jaFilterGenFunc = func(serviceInfo *ci.ServiceInfo) (*hcmpb.HttpFilter, []*c
 					CacheDuration: &durationpb.Duration{
 						Seconds: int64(serviceInfo.Options.JwksCacheDurationInS),
 					},
+					// if always retrying, then need to figure out how to modify go unit tests bootsrapping.
+					/*
+						RetryPolicy: &corepb.RetryPolicy{
+							RetryBackOff: &corepb.BackoffStrategy{
+								// there is an assert somewhere for baseinterval in milliseconds > 0 ...
+								BaseInterval: &durationpb.Duration{Seconds: 0, Nanos: 10000000},
+								MaxInterval:  &durationpb.Duration{Seconds: 32, Nanos: 0},
+							},
+							NumRetries: &wrapperspb.UInt32Value{Value: uint32(3)},
+						},
+					*/
 				},
 			},
 			FromHeaders:          fromHeaders,
